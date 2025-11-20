@@ -1,89 +1,88 @@
-/* Import Google Fonts - Brutalist Typography */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+/* Import Google Fonts - Elegant Typography */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-[var(--border)];
-  }
-  
   body {
-    @apply bg-[var(--bg)] text-[var(--fg)] antialiased;
-    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    @apply bg-[var(--bg)] text-[var(--text-primary)] antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
-  /* Brutalist headings */
+  /* Elegant headings */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-black uppercase tracking-tight;
+    @apply font-serif font-semibold;
+    font-family: 'Playfair Display', Georgia, serif;
   }
 }
 
 @layer components {
-  /* Brutalist button component */
+  /* Elegant button component */
   .btn {
-    @apply inline-block px-8 py-4 bg-[var(--fg)] text-[var(--bg)] border-[3px] border-[var(--fg)] font-black uppercase tracking-wider cursor-pointer;
-    transition: none;
+    @apply inline-block px-8 py-3.5 bg-[var(--accent)] text-white rounded-lg font-medium cursor-pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   }
   
   .btn:hover {
-    @apply bg-[var(--bg)] text-[var(--fg)];
-    transform: translate(-4px, -4px);
-    box-shadow: 4px 4px 0 var(--fg);
+    @apply bg-[var(--accent-hover)];
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   }
   
-  .btn-accent {
-    @apply bg-[var(--accent)] text-[var(--bg)] border-[var(--fg)];
+  .btn-outline {
+    @apply bg-transparent text-[var(--accent)] border-2 border-[var(--accent)];
   }
   
-  .btn-accent:hover {
-    @apply bg-[var(--bg)] text-[var(--fg)];
-    box-shadow: 4px 4px 0 var(--accent);
+  .btn-outline:hover {
+    @apply bg-[var(--accent)] text-white;
   }
   
-  /* Brutalist card */
+  /* Elegant card */
   .card {
-    @apply border-[3px] border-[var(--fg)] p-6 bg-[var(--bg)];
-    transition: none;
+    @apply bg-[var(--bg)] border border-[var(--border-light)] rounded-2xl p-6;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   }
   
   .card:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 4px 4px 0 var(--fg);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+    border-color: var(--accent-soft);
   }
   
-  /* Brutalist link */
+  /* Elegant link */
   .link {
-    @apply text-[var(--fg)] no-underline border-b-[3px] border-[var(--accent)];
-    transition: none;
+    @apply text-[var(--accent)] no-underline;
+    transition: color 0.2s ease;
   }
   
   .link:hover {
-    @apply bg-[var(--accent)] text-[var(--bg)];
+    @apply text-[var(--accent-hover)];
   }
 }
 
 @layer utilities {
-  /* Brutalist utilities */
-  .border-brutalist {
-    @apply border-[3px] border-[var(--fg)];
+  /* Elegant utilities */
+  .text-serif {
+    font-family: 'Playfair Display', Georgia, serif;
   }
   
-  .border-heavy {
-    @apply border-[5px] border-[var(--fg)];
+  .text-sans {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
-  .shadow-brutalist {
-    box-shadow: 8px 8px 0 var(--fg);
+  .text-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
   }
   
-  .shadow-brutalist-accent {
-    box-shadow: 8px 8px 0 var(--accent);
+  .shadow-elegant {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
   }
   
-  .text-brutalist {
-    @apply font-black uppercase tracking-tight;
+  .shadow-elegant-lg {
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
   }
 }

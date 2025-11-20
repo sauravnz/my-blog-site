@@ -2,35 +2,35 @@
 import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<header class="sticky top-0 z-40 w-full border-b-[3px] border-[var(--fg)] bg-[var(--bg)]">
-  <div class="container mx-auto px-4 py-6">
+<header class="sticky top-0 z-40 w-full border-b border-[var(--border-light)] bg-[var(--bg)]/95 backdrop-blur-md">
+  <div class="container mx-auto px-4 py-5">
     <div class="flex items-center justify-between">
-      <!-- Logo/Brand - Brutalist -->
-      <a href="/" class="text-3xl md:text-4xl font-black uppercase tracking-tighter text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] px-2 py-1 border-[3px] border-transparent hover:border-[var(--fg)]">
-        [NOTES]
+      <!-- Logo/Brand - Elegant Serif -->
+      <a href="/" class="text-3xl md:text-4xl font-serif font-bold text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
+        Notes
       </a>
 
-      <!-- Navigation - Brutalist -->
-      <nav class="hidden md:flex items-center space-x-2">
-        <a href="/" class="px-4 py-2 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase text-sm border-[2px] border-transparent hover:border-[var(--fg)]">
+      <!-- Navigation - Elegant -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Home
         </a>
-        <a href="/notes" class="px-4 py-2 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase text-sm border-[2px] border-transparent hover:border-[var(--fg)]">
+        <a href="/notes" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Notes
         </a>
-        <a href="/tags" class="px-4 py-2 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase text-sm border-[2px] border-transparent hover:border-[var(--fg)]">
+        <a href="/tags" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Tags
         </a>
-        <a href="/search" class="px-4 py-2 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase text-sm border-[2px] border-transparent hover:border-[var(--fg)]">
+        <a href="/search" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Search
         </a>
-        <a href="/about" class="px-4 py-2 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase text-sm border-[2px] border-transparent hover:border-[var(--fg)]">
+        <a href="/about" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           About
         </a>
-        <a href="/projects" class="px-4 py-2 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase text-sm border-[2px] border-transparent hover:border-[var(--fg)]">
+        <a href="/projects" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Projects
         </a>
-        <a href="/connect" class="px-4 py-2 bg-[var(--accent)] text-[var(--bg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-black uppercase text-sm border-[2px] border-[var(--fg)]">
+        <a href="/connect" class="px-6 py-2.5 bg-[var(--accent)] text-white rounded-full hover:bg-[var(--accent-hover)] transition-all font-medium shadow-elegant-sm hover:shadow-elegant">
           Connect
         </a>
       </nav>
@@ -39,41 +39,41 @@ import ThemeToggle from './ThemeToggle.astro';
       <div class="flex items-center space-x-4">
         <ThemeToggle />
 
-        <!-- Mobile menu button - Brutalist -->
+        <!-- Mobile menu button - Elegant -->
         <button
           id="mobile-menu-button"
-          class="md:hidden p-3 border-[3px] border-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)]"
+          class="md:hidden p-2 rounded-lg hover:bg-[var(--muted)] transition-colors"
           aria-label="Toggle mobile menu"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
-            <path stroke-linecap="square" stroke-linejoin="miter" d="M4 6h16M4 12h16M4 18h16"></path>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Navigation - Brutalist -->
-    <nav id="mobile-menu" class="hidden md:hidden mt-6 pb-4 border-t-[3px] border-[var(--fg)]">
-      <div class="flex flex-col space-y-2 pt-6">
-        <a href="/" class="px-4 py-3 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase border-[2px] border-[var(--fg)]">
+    <!-- Mobile Navigation - Elegant -->
+    <nav id="mobile-menu" class="hidden md:hidden mt-6 pb-4 border-t border-[var(--border-light)]">
+      <div class="flex flex-col space-y-3 pt-6">
+        <a href="/" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Home
         </a>
-        <a href="/notes" class="px-4 py-3 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase border-[2px] border-[var(--fg)]">
+        <a href="/notes" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Notes
         </a>
-        <a href="/tags" class="px-4 py-3 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase border-[2px] border-[var(--fg)]">
+        <a href="/tags" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Tags
         </a>
-        <a href="/search" class="px-4 py-3 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase border-[2px] border-[var(--fg)]">
+        <a href="/search" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Search
         </a>
-        <a href="/about" class="px-4 py-3 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase border-[2px] border-[var(--fg)]">
+        <a href="/about" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           About
         </a>
-        <a href="/projects" class="px-4 py-3 text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)] font-bold uppercase border-[2px] border-[var(--fg)]">
+        <a href="/projects" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Projects
         </a>
-        <a href="/connect" class="px-4 py-3 bg-[var(--accent)] text-[var(--bg)] hover:bg-[var(--fg)] font-black uppercase border-[2px] border-[var(--fg)]">
+        <a href="/connect" class="px-4 py-2.5 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-all font-medium text-center shadow-elegant-sm">
           Connect
         </a>
       </div>

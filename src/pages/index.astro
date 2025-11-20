@@ -43,40 +43,54 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
 <Layout title="Home" description={description}>
   <Header />
 
-  <main id="main" class="container mx-auto px-4 py-12">
-    <!-- Hero Section - Brutalist -->
-    <section class="text-left mb-24 border-[5px] border-[var(--fg)] p-12 relative">
-      <div class="absolute top-0 left-0 w-full h-full border-[5px] border-[var(--fg)] transform translate-x-3 translate-y-3 -z-10"></div>
-      
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-[var(--fg)] mb-6 leading-none">
-        Welcome to<br/>
-        <span class="text-[var(--accent)] inline-block border-[5px] border-[var(--fg)] px-4 py-2 mt-2">[NOTES]</span>
+  <main id="main" class="container mx-auto px-4 py-16">
+    <!-- Hero Section - Elegant -->
+    <section class="text-center mb-24 max-w-4xl mx-auto">
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-[var(--text-primary)] mb-6 leading-tight">
+        Welcome to my
+        <span class="text-[var(--accent)] block mt-2">Notes</span>
       </h1>
-      <p class="text-xl md:text-2xl text-[var(--fg)] font-bold uppercase tracking-wide max-w-3xl mb-8 leading-relaxed">
-        A personal space for thoughts, ideas, and discoveries. Built with Astro, designed for clarity.
+      <p class="text-xl md:text-2xl text-[var(--text-secondary)] max-w-3xl mx-auto mb-10 leading-relaxed">
+        A personal space for thoughts, ideas, and discoveries. Built with care, designed for clarity.
       </p>
-      <div class="flex flex-wrap gap-4 mb-0">
-        <a href="/notes" class="px-8 py-4 bg-[var(--fg)] text-[var(--bg)] border-[3px] border-[var(--fg)] font-black uppercase tracking-wider hover:bg-[var(--bg)] hover:text-[var(--fg)] inline-block">
-          Browse Notes →
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/notes" class="px-8 py-3.5 bg-[var(--accent)] text-white rounded-full hover:bg-[var(--accent-hover)] transition-all font-medium shadow-elegant-sm hover:shadow-elegant inline-flex items-center">
+          Browse Notes
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
         </a>
-        <a href="/tags" class="px-8 py-4 bg-[var(--accent)] text-[var(--bg)] border-[3px] border-[var(--fg)] font-black uppercase tracking-wider hover:bg-[var(--bg)] hover:text-[var(--fg)] inline-block">
+        <a href="/tags" class="px-8 py-3.5 bg-transparent text-[var(--accent)] border-2 border-[var(--accent)] rounded-full hover:bg-[var(--accent)] hover:text-white transition-all font-medium">
           Explore Tags
         </a>
-        <a href="/search" class="px-8 py-4 bg-[var(--bg)] text-[var(--fg)] border-[3px] border-[var(--fg)] font-black uppercase tracking-wider hover:bg-[var(--fg)] hover:text-[var(--bg)] inline-block">
+        <a href="/search" class="px-8 py-3.5 bg-[var(--muted)] text-[var(--text-primary)] rounded-full hover:bg-[var(--accent-light)] hover:text-[var(--accent)] transition-all font-medium">
           Search
         </a>
       </div>
     </section>
 
-    <!-- Featured Notes - Brutalist -->
+    <!-- Decorative Divider -->
+    <div class="relative mb-20">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-[var(--border-light)]"></div>
+      </div>
+      <div class="relative flex justify-center">
+        <span class="bg-[var(--bg)] px-6 text-[var(--accent)] text-2xl">◆</span>
+      </div>
+    </div>
+
+    <!-- Featured Notes - Elegant -->
     {featuredNotes.length > 0 && (
       <section class="mb-24">
-        <div class="flex items-center justify-between mb-8 border-b-[5px] border-[var(--fg)] pb-4">
-          <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[var(--fg)]">
-            [Featured Notes]
+        <div class="flex items-center justify-between mb-10">
+          <h2 class="text-4xl md:text-5xl font-serif font-bold text-[var(--text-primary)]">
+            Featured Notes
           </h2>
-          <a href="/notes" class="text-[var(--fg)] font-bold uppercase text-sm border-[3px] border-[var(--fg)] px-4 py-2 hover:bg-[var(--fg)] hover:text-[var(--bg)]">
-            View All →
+          <a href="/notes" class="text-[var(--accent)] hover:text-[var(--accent-hover)] font-medium inline-flex items-center transition-colors">
+            View all
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
           </a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -87,15 +101,18 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
       </section>
     )}
 
-    <!-- Latest Notes - Brutalist -->
+    <!-- Latest Notes - Elegant -->
     {latestNotes.length > 0 && (
       <section class="mb-24">
-        <div class="flex items-center justify-between mb-8 border-b-[5px] border-[var(--fg)] pb-4">
-          <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[var(--fg)]">
-            [Latest Notes]
+        <div class="flex items-center justify-between mb-10">
+          <h2 class="text-4xl md:text-5xl font-serif font-bold text-[var(--text-primary)]">
+            Latest Notes
           </h2>
-          <a href="/notes" class="text-[var(--fg)] font-bold uppercase text-sm border-[3px] border-[var(--fg)] px-4 py-2 hover:bg-[var(--fg)] hover:text-[var(--bg)]">
-            View All →
+          <a href="/notes" class="text-[var(--accent)] hover:text-[var(--accent-hover)] font-medium inline-flex items-center transition-colors">
+            View all
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
           </a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -106,15 +123,18 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
       </section>
     )}
 
-    <!-- Popular Tags - Brutalist -->
+    <!-- Popular Tags - Elegant -->
     {tagCounts.length > 0 && (
       <section class="mb-24">
-        <div class="flex items-center justify-between mb-8 border-b-[5px] border-[var(--fg)] pb-4">
-          <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[var(--fg)]">
-            [Popular Topics]
+        <div class="flex items-center justify-between mb-10">
+          <h2 class="text-4xl md:text-5xl font-serif font-bold text-[var(--text-primary)]">
+            Popular Topics
           </h2>
-          <a href="/tags" class="text-[var(--fg)] font-bold uppercase text-sm border-[3px] border-[var(--fg)] px-4 py-2 hover:bg-[var(--fg)] hover:text-[var(--bg)]">
-            View All →
+          <a href="/tags" class="text-[var(--accent)] hover:text-[var(--accent-hover)] font-medium inline-flex items-center transition-colors">
+            View all
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
           </a>
         </div>
         <div class="flex flex-wrap gap-3">
@@ -125,32 +145,30 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
       </section>
     )}
 
-    <!-- Stats - Brutalist -->
-    <section class="bg-[var(--accent)] border-[5px] border-[var(--fg)] p-12 text-center relative">
-      <div class="absolute top-0 left-0 w-full h-full border-[5px] border-[var(--fg)] transform translate-x-3 translate-y-3 -z-10 bg-[var(--bg)]"></div>
-      
+    <!-- Stats - Elegant -->
+    <section class="bg-gradient-to-br from-[var(--accent-light)] to-[var(--muted)] border-2 border-[var(--accent-soft)] rounded-3xl p-12 text-center shadow-elegant-lg">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-        <div>
-          <div class="text-6xl font-black text-[var(--bg)] mb-3 uppercase">
+        <div class="group">
+          <div class="text-6xl font-serif font-bold text-[var(--accent)] mb-3 group-hover:scale-110 transition-transform">
             {notes.length}
           </div>
-          <div class="text-[var(--bg)] font-black uppercase tracking-wider text-lg">
+          <div class="text-[var(--text-secondary)] font-medium text-lg">
             Total Notes
           </div>
         </div>
-        <div>
-          <div class="text-6xl font-black text-[var(--bg)] mb-3 uppercase">
+        <div class="group">
+          <div class="text-6xl font-serif font-bold text-[var(--accent)] mb-3 group-hover:scale-110 transition-transform">
             {allTags.length}
           </div>
-          <div class="text-[var(--bg)] font-black uppercase tracking-wider text-lg">
+          <div class="text-[var(--text-secondary)] font-medium text-lg">
             Topics
           </div>
         </div>
-        <div>
-          <div class="text-6xl font-black text-[var(--bg)] mb-3 uppercase">
+        <div class="group">
+          <div class="text-6xl font-serif font-bold text-[var(--accent)] mb-3 group-hover:scale-110 transition-transform">
             {featuredNotes.length}
           </div>
-          <div class="text-[var(--bg)] font-black uppercase tracking-wider text-lg">
+          <div class="text-[var(--text-secondary)] font-medium text-lg">
             Featured
           </div>
         </div>
@@ -160,14 +178,3 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
 
   <Footer />
 </Layout>
-
-<style>
-  a, button {
-    transition: none;
-  }
-  
-  a:hover, button:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 2px 2px 0 var(--fg);
-  }
-</style>

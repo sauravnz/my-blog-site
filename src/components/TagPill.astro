@@ -9,31 +9,32 @@ export interface Props {
 const { tag, href, size = 'md', variant = 'default' } = Astro.props;
 
 const sizeClasses = {
-  sm: 'px-2 py-1 text-xs',
-  md: 'px-3 py-1.5 text-sm',
-  lg: 'px-4 py-2 text-base',
+  sm: 'px-3 py-1.5 text-xs',
+  md: 'px-4 py-2 text-sm',
+  lg: 'px-5 py-2.5 text-base',
 };
 
 const variantClasses = {
-  default: 'bg-[var(--bg)] text-[var(--fg)] border-[2px] border-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)]',
-  outline: 'bg-transparent text-[var(--fg)] border-[2px] border-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] hover:border-[var(--fg)]',
+  default: 'bg-[var(--muted)] text-[var(--text-secondary)] border border-[var(--border-light)] hover:bg-[var(--accent-light)] hover:text-[var(--accent)] hover:border-[var(--accent-soft)]',
+  outline: 'bg-transparent text-[var(--text-secondary)] border border-[var(--border-medium)] hover:bg-[var(--accent-light)] hover:text-[var(--accent)] hover:border-[var(--accent)]',
 };
 
-const classes = `inline-flex items-center font-bold uppercase tracking-wide ${sizeClasses[size]} ${variantClasses[variant]}`;
+const classes = `inline-flex items-center rounded-full font-medium transition-all duration-200 ${sizeClasses[size]} ${variantClasses[variant]}`;
 ---
 
 {href ? (
   <a href={href} class={classes}>
-    #{tag}
+    {tag}
   </a>
 ) : (
   <span class={classes}>
-    #{tag}
+    {tag}
   </span>
 )}
 
 <style>
-  a, span {
-    transition: none;
+  a:hover, span:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 </style>
