@@ -43,41 +43,43 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
 <Layout title="Home" description={description}>
   <Header />
 
-  <main id="main" class="container mx-auto px-4 py-8">
-    <!-- Hero Section -->
-    <section class="text-center mb-16">
-      <h1 class="text-5xl md:text-6xl font-serif font-bold text-[var(--fg)] mb-6">
-        Welcome to my
-        <span class="text-[var(--accent)]">Notes</span>
+  <main id="main" class="container mx-auto px-4 py-12">
+    <!-- Hero Section - Brutalist -->
+    <section class="text-left mb-24 border-[5px] border-[var(--fg)] p-12 relative">
+      <div class="absolute top-0 left-0 w-full h-full border-[5px] border-[var(--fg)] transform translate-x-3 translate-y-3 -z-10"></div>
+      
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-[var(--fg)] mb-6 leading-none">
+        Welcome to<br/>
+        <span class="text-[var(--accent)] inline-block border-[5px] border-[var(--fg)] px-4 py-2 mt-2">[NOTES]</span>
       </h1>
-      <p class="text-xl text-[var(--fg)] opacity-80 max-w-3xl mx-auto mb-8 leading-relaxed">
+      <p class="text-xl md:text-2xl text-[var(--fg)] font-bold uppercase tracking-wide max-w-3xl mb-8 leading-relaxed">
         A personal space for thoughts, ideas, and discoveries. Built with Astro, designed for clarity.
       </p>
-      <div class="flex flex-wrap justify-center gap-3 mb-12">
-        <a href="/notes" class="px-6 py-3 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent)]/90 transition-colors font-medium">
-          Browse Notes
+      <div class="flex flex-wrap gap-4 mb-0">
+        <a href="/notes" class="px-8 py-4 bg-[var(--fg)] text-[var(--bg)] border-[3px] border-[var(--fg)] font-black uppercase tracking-wider hover:bg-[var(--bg)] hover:text-[var(--fg)] inline-block">
+          Browse Notes →
         </a>
-        <a href="/tags" class="px-6 py-3 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-white transition-colors font-medium">
+        <a href="/tags" class="px-8 py-4 bg-[var(--accent)] text-[var(--bg)] border-[3px] border-[var(--fg)] font-black uppercase tracking-wider hover:bg-[var(--bg)] hover:text-[var(--fg)] inline-block">
           Explore Tags
         </a>
-        <a href="/search" class="px-6 py-3 border border-[var(--muted)] text-[var(--fg)] rounded-lg hover:border-[var(--accent)] transition-colors font-medium">
+        <a href="/search" class="px-8 py-4 bg-[var(--bg)] text-[var(--fg)] border-[3px] border-[var(--fg)] font-black uppercase tracking-wider hover:bg-[var(--fg)] hover:text-[var(--bg)] inline-block">
           Search
         </a>
       </div>
     </section>
 
-    <!-- Featured Notes -->
+    <!-- Featured Notes - Brutalist -->
     {featuredNotes.length > 0 && (
-      <section class="mb-16">
-        <div class="flex items-center justify-between mb-8">
-          <h2 class="text-3xl font-serif font-bold text-[var(--fg)]">
-            Featured Notes
+      <section class="mb-24">
+        <div class="flex items-center justify-between mb-8 border-b-[5px] border-[var(--fg)] pb-4">
+          <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[var(--fg)]">
+            [Featured Notes]
           </h2>
-          <a href="/notes" class="text-[var(--accent)] hover:underline font-medium">
-            View all →
+          <a href="/notes" class="text-[var(--fg)] font-bold uppercase text-sm border-[3px] border-[var(--fg)] px-4 py-2 hover:bg-[var(--fg)] hover:text-[var(--bg)]">
+            View All →
           </a>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           {featuredNotes.slice(0, 4).map(note => (
             <PostCard slug={note.slug} featured={true} />
           ))}
@@ -85,15 +87,15 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
       </section>
     )}
 
-    <!-- Latest Notes -->
+    <!-- Latest Notes - Brutalist -->
     {latestNotes.length > 0 && (
-      <section class="mb-16">
-        <div class="flex items-center justify-between mb-8">
-          <h2 class="text-3xl font-serif font-bold text-[var(--fg)]">
-            Latest Notes
+      <section class="mb-24">
+        <div class="flex items-center justify-between mb-8 border-b-[5px] border-[var(--fg)] pb-4">
+          <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[var(--fg)]">
+            [Latest Notes]
           </h2>
-          <a href="/notes" class="text-[var(--accent)] hover:underline font-medium">
-            View all →
+          <a href="/notes" class="text-[var(--fg)] font-bold uppercase text-sm border-[3px] border-[var(--fg)] px-4 py-2 hover:bg-[var(--fg)] hover:text-[var(--bg)]">
+            View All →
           </a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -104,15 +106,15 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
       </section>
     )}
 
-    <!-- Popular Tags -->
+    <!-- Popular Tags - Brutalist -->
     {tagCounts.length > 0 && (
-      <section class="mb-16">
-        <div class="flex items-center justify-between mb-8">
-          <h2 class="text-3xl font-serif font-bold text-[var(--fg)]">
-            Popular Topics
+      <section class="mb-24">
+        <div class="flex items-center justify-between mb-8 border-b-[5px] border-[var(--fg)] pb-4">
+          <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[var(--fg)]">
+            [Popular Topics]
           </h2>
-          <a href="/tags" class="text-[var(--accent)] hover:underline font-medium">
-            View all →
+          <a href="/tags" class="text-[var(--fg)] font-bold uppercase text-sm border-[3px] border-[var(--fg)] px-4 py-2 hover:bg-[var(--fg)] hover:text-[var(--bg)]">
+            View All →
           </a>
         </div>
         <div class="flex flex-wrap gap-3">
@@ -123,30 +125,32 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
       </section>
     )}
 
-    <!-- Stats -->
-    <section class="bg-[var(--muted)]/30 rounded-xl p-8 text-center">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Stats - Brutalist -->
+    <section class="bg-[var(--accent)] border-[5px] border-[var(--fg)] p-12 text-center relative">
+      <div class="absolute top-0 left-0 w-full h-full border-[5px] border-[var(--fg)] transform translate-x-3 translate-y-3 -z-10 bg-[var(--bg)]"></div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-          <div class="text-3xl font-bold text-[var(--accent)] mb-2">
+          <div class="text-6xl font-black text-[var(--bg)] mb-3 uppercase">
             {notes.length}
           </div>
-          <div class="text-[var(--fg)] opacity-70">
+          <div class="text-[var(--bg)] font-black uppercase tracking-wider text-lg">
             Total Notes
           </div>
         </div>
         <div>
-          <div class="text-3xl font-bold text-[var(--accent)] mb-2">
+          <div class="text-6xl font-black text-[var(--bg)] mb-3 uppercase">
             {allTags.length}
           </div>
-          <div class="text-[var(--fg)] opacity-70">
+          <div class="text-[var(--bg)] font-black uppercase tracking-wider text-lg">
             Topics
           </div>
         </div>
         <div>
-          <div class="text-3xl font-bold text-[var(--accent)] mb-2">
+          <div class="text-6xl font-black text-[var(--bg)] mb-3 uppercase">
             {featuredNotes.length}
           </div>
-          <div class="text-[var(--fg)] opacity-70">
+          <div class="text-[var(--bg)] font-black uppercase tracking-wider text-lg">
             Featured
           </div>
         </div>
@@ -156,3 +160,14 @@ const description = "Personal notes, thoughts, and discoveries. A clean, elegant
 
   <Footer />
 </Layout>
+
+<style>
+  a, button {
+    transition: none;
+  }
+  
+  a:hover, button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 2px 2px 0 var(--fg);
+  }
+</style>

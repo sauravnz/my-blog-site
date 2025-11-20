@@ -1,92 +1,390 @@
-/* Theme CSS Variables */
+/* Minimalist Brutalism Theme */
+
 :root {
+  /* Base Colors - High Contrast */
   --bg: #ffffff;
-  --fg: #0f172a;
-  --muted: #e2e8f0;
-  --accent: #6366f1;
+  --fg: #000000;
+  --muted: #e5e5e5;
+  --accent: #00ff41; /* Electric green */
+  --accent-hover: #00cc34;
+  
+  /* Brutalist Colors */
+  --border: #000000;
+  --border-heavy: 3px;
+  --shadow: none;
+  
+  /* Typography Scale */
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Space Mono', 'Fira Code', 'Courier New', monospace;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
 }
 
 html {
   --bg: #ffffff;
-  --fg: #0f172a;
-  --muted: #e2e8f0;
-  --accent: #6366f1;
+  --fg: #000000;
+  --muted: #e5e5e5;
+  --accent: #00ff41;
+  --accent-hover: #00cc34;
+  --border: #000000;
 }
 
 html.dark {
-  --bg: #0b1220;
-  --fg: #e5e7eb;
-  --muted: #1f2937;
-  --accent: #818cf8;
+  --bg: #0a0a0a;
+  --fg: #ffffff;
+  --muted: #1a1a1a;
+  --accent: #00ff41;
+  --accent-hover: #00cc34;
+  --border: #ffffff;
 }
 
 /* Ensure CSS variables are available immediately */
 html:not(.dark) {
   --bg: #ffffff;
-  --fg: #0f172a;
-  --muted: #e2e8f0;
-  --accent: #6366f1;
+  --fg: #000000;
+  --muted: #e5e5e5;
+  --accent: #00ff41;
+  --accent-hover: #00cc34;
+  --border: #000000;
 }
 
 html.dark {
-  --bg: #0b1220;
-  --fg: #e5e7eb;
-  --muted: #1f2937;
-  --accent: #818cf8;
+  --bg: #0a0a0a;
+  --fg: #ffffff;
+  --muted: #1a1a1a;
+  --accent: #00ff41;
+  --accent-hover: #00cc34;
+  --border: #ffffff;
 }
 
-/* Theme-aware utilities */
-.theme-light {
-  --bg: #ffffff;
-  --fg: #0f172a;
-  --muted: #e2e8f0;
-  --accent: #6366f1;
+/* Brutalist Base Styles */
+* {
+  box-sizing: border-box;
 }
 
-.theme-dark {
-  --bg: #0b1220;
-  --fg: #e5e7eb;
-  --muted: #1f2937;
-  --accent: #818cf8;
-}
-
-/* Callout styles */
-.callout {
-  border-left: 4px solid var(--accent);
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 0 0.5rem 0.5rem 0;
+body {
   background-color: var(--bg);
-  border-right: 1px solid var(--muted);
-  border-top: 1px solid var(--muted);
-  border-bottom: 1px solid var(--muted);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  transition: none; /* No smooth transitions in brutalism */
+}
+
+/* Brutalist Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* Brutalist Links */
+a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 3px solid var(--accent);
+  transition: none;
+}
+
+a:hover {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+/* Brutalist Buttons */
+.btn-brutalist {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: var(--fg);
+  color: var(--bg);
+  border: 3px solid var(--fg);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: none;
+  font-family: var(--font-sans);
+}
+
+.btn-brutalist:hover {
+  background: var(--bg);
+  color: var(--fg);
+  border-color: var(--fg);
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 var(--fg);
+}
+
+.btn-brutalist-accent {
+  background: var(--accent);
+  color: var(--bg);
+  border: 3px solid var(--fg);
+}
+
+.btn-brutalist-accent:hover {
+  background: var(--bg);
+  color: var(--fg);
+  border-color: var(--fg);
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 var(--accent);
+}
+
+/* Brutalist Cards */
+.card-brutalist {
+  border: 3px solid var(--fg);
+  padding: var(--space-md);
+  background: var(--bg);
+  position: relative;
+}
+
+.card-brutalist:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 var(--fg);
+}
+
+.card-brutalist-featured {
+  border: 5px solid var(--fg);
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Brutalist Borders & Dividers */
+.border-brutalist {
+  border: 3px solid var(--fg);
+}
+
+.border-top-brutalist {
+  border-top: 3px solid var(--fg);
+}
+
+.border-bottom-brutalist {
+  border-bottom: 3px solid var(--fg);
+}
+
+.divider-brutalist {
+  width: 100%;
+  height: 3px;
+  background: var(--fg);
+  margin: var(--space-lg) 0;
+}
+
+/* Callout styles - Brutalist version */
+.callout {
+  border: 3px solid var(--fg);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+  background-color: var(--bg);
+  position: relative;
+}
+
+.callout::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 3px solid var(--fg);
+  transform: translate(6px, 6px);
+  z-index: -1;
 }
 
 .callout.note {
-  border-left-color: #3b82f6;
+  border-color: var(--accent);
+}
+
+.callout.note::before {
+  border-color: var(--accent);
 }
 
 .callout.tip {
-  border-left-color: #10b981;
+  background-color: var(--accent);
+  color: var(--bg);
 }
 
 .callout.warn {
-  border-left-color: #f59e0b;
+  border-color: #ff0000;
+  background-color: #ff0000;
+  color: var(--bg);
 }
 
-/* Progress bar */
+.callout.warn::before {
+  border-color: #ff0000;
+}
+
+/* Progress bar - Brutalist */
 .progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, #6366f1, #6366f1);
+  height: 5px;
+  background: var(--accent);
   transform-origin: left;
   z-index: 1000;
-  transition: transform 0.1s ease-out;
+  transition: none;
+  border-bottom: 2px solid var(--fg);
 }
 
 html.dark .progress-bar {
-  background: linear-gradient(90deg, #818cf8, #818cf8);
+  background: var(--accent);
+  border-bottom: 2px solid var(--fg);
+}
+
+/* Brutalist Grid Lines (optional decorative element) */
+.grid-brutalist {
+  background-image: 
+    linear-gradient(var(--muted) 1px, transparent 1px),
+    linear-gradient(90deg, var(--muted) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Tag Pills - Brutalist */
+.tag-brutalist {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  color: var(--fg);
+  border: 2px solid var(--fg);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  margin: 0.25rem;
+}
+
+.tag-brutalist:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+/* Code blocks - Brutalist */
+pre {
+  border: 3px solid var(--fg);
+  padding: var(--space-md);
+  background: var(--muted);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+}
+
+code {
+  font-family: var(--font-mono);
+  background: var(--muted);
+  padding: 0.2em 0.4em;
+  border: 1px solid var(--fg);
+  font-size: 0.9em;
+}
+
+pre code {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+/* Blockquotes - Brutalist */
+blockquote {
+  border-left: 5px solid var(--fg);
+  padding-left: var(--space-md);
+  margin: var(--space-md) 0;
+  font-style: italic;
+  background: var(--muted);
+  padding: var(--space-md);
+}
+
+/* Tables - Brutalist */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid var(--fg);
+  margin: var(--space-md) 0;
+}
+
+th, td {
+  border: 2px solid var(--fg);
+  padding: var(--space-sm);
+  text-align: left;
+}
+
+th {
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+  background: var(--muted);
+}
+
+/* Brutalist Accent Elements */
+.accent-box {
+  background: var(--accent);
+  color: var(--bg);
+  padding: var(--space-md);
+  border: 3px solid var(--fg);
+  font-weight: 700;
+}
+
+/* Asymmetric Layout Helpers */
+.offset-left {
+  margin-left: -2rem;
+}
+
+.offset-right {
+  margin-right: -2rem;
+}
+
+/* Brutalist Shadows (for hover states) */
+.shadow-brutalist {
+  box-shadow: 8px 8px 0 var(--fg);
+}
+
+.shadow-brutalist-accent {
+  box-shadow: 8px 8px 0 var(--accent);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+::-moz-selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Scrollbar - Brutalist */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-left: 2px solid var(--fg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fg);
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }

@@ -1,3 +1,89 @@
+/* Import Google Fonts - Brutalist Typography */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-[var(--border)];
+  }
+  
+  body {
+    @apply bg-[var(--bg)] text-[var(--fg)] antialiased;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  /* Brutalist headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-black uppercase tracking-tight;
+  }
+}
+
+@layer components {
+  /* Brutalist button component */
+  .btn {
+    @apply inline-block px-8 py-4 bg-[var(--fg)] text-[var(--bg)] border-[3px] border-[var(--fg)] font-black uppercase tracking-wider cursor-pointer;
+    transition: none;
+  }
+  
+  .btn:hover {
+    @apply bg-[var(--bg)] text-[var(--fg)];
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0 var(--fg);
+  }
+  
+  .btn-accent {
+    @apply bg-[var(--accent)] text-[var(--bg)] border-[var(--fg)];
+  }
+  
+  .btn-accent:hover {
+    @apply bg-[var(--bg)] text-[var(--fg)];
+    box-shadow: 4px 4px 0 var(--accent);
+  }
+  
+  /* Brutalist card */
+  .card {
+    @apply border-[3px] border-[var(--fg)] p-6 bg-[var(--bg)];
+    transition: none;
+  }
+  
+  .card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0 var(--fg);
+  }
+  
+  /* Brutalist link */
+  .link {
+    @apply text-[var(--fg)] no-underline border-b-[3px] border-[var(--accent)];
+    transition: none;
+  }
+  
+  .link:hover {
+    @apply bg-[var(--accent)] text-[var(--bg)];
+  }
+}
+
+@layer utilities {
+  /* Brutalist utilities */
+  .border-brutalist {
+    @apply border-[3px] border-[var(--fg)];
+  }
+  
+  .border-heavy {
+    @apply border-[5px] border-[var(--fg)];
+  }
+  
+  .shadow-brutalist {
+    box-shadow: 8px 8px 0 var(--fg);
+  }
+  
+  .shadow-brutalist-accent {
+    box-shadow: 8px 8px 0 var(--accent);
+  }
+  
+  .text-brutalist {
+    @apply font-black uppercase tracking-tight;
+  }
+}
