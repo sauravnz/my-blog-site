@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://yourdomain.tld/sitemap-index.xml
+
+# Disallow draft content (handled by noindex meta tags)
+Disallow: /notes/*?drafts=1
+
+# Allow search engines to access CSS and JS
+Allow: /_astro/
+Allow: *.css
+Allow: *.js
+
+# Crawl delay (optional)
+Crawl-delay: 1
+

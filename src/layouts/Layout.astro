@@ -1,0 +1,143 @@
+---
+import '../styles/global.css';
+import '../styles/theme.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+  className?: string;
+}
+
+const { title, description, noindex = false, className = '' } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = `${Astro.site}og-image.png`;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description || `${title} - Personal notes and thoughts`} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description || `${title} - Personal notes and thoughts`} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Personal Blog" />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description || `${title} - Personal notes and thoughts`} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Theme and Fonts -->
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      })();
+
+      const html = document.documentElement;
+      const body = document.body;
+
+      if (theme === "dark") {
+        html.classList.add("dark");
+        body.classList.add("dark");
+      } else {
+        html.classList.remove("dark");
+        body.classList.remove("dark");
+      }
+
+      // Apply theme immediately to prevent flash
+      html.style.setProperty("--bg", theme === "dark" ? "#0b1220" : "#ffffff");
+      html.style.setProperty("--fg", theme === "dark" ? "#e5e7eb" : "#0f172a");
+      html.style.setProperty("--muted", theme === "dark" ? "#1f2937" : "#e2e8f0");
+      html.style.setProperty("--accent", theme === "dark" ? "#818cf8" : "#6366f1");
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+  </head>
+  <body class={`transition-colors duration-300 ${className}`}>
+    <!-- Progress Bar -->
+    <div id="progress-bar" class="progress-bar" style="transform: scaleX(0);"></div>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-indigo-600 text-white px-4 py-2 rounded-md z-50">
+      Skip to main content
+    </a>
+
+    <slot />
+
+    <!-- Scripts -->
+    <script>
+      // Progress bar
+      function updateProgressBar() {
+        const progressBar = document.getElementById('progress-bar');
+        const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        progressBar.style.transform = `scaleX(${scrollPercent / 100})`;
+      }
+
+      window.addEventListener('scroll', updateProgressBar);
+      window.addEventListener('load', updateProgressBar);
+
+      // Theme toggle functionality (will be enhanced by ThemeToggle component)
+      window.toggleTheme = function() {
+        const html = document.documentElement;
+        const body = document.body;
+        const isDark = html.classList.contains('dark');
+
+        if (isDark) {
+          html.classList.remove('dark');
+          body.classList.remove('dark');
+          html.style.setProperty("--bg", "#ffffff");
+          html.style.setProperty("--fg", "#0f172a");
+          html.style.setProperty("--muted", "#e2e8f0");
+          html.style.setProperty("--accent", "#6366f1");
+          localStorage.setItem("theme", "light");
+        } else {
+          html.classList.add('dark');
+          body.classList.add('dark');
+          html.style.setProperty("--bg", "#0b1220");
+          html.style.setProperty("--fg", "#e5e7eb");
+          html.style.setProperty("--muted", "#1f2937");
+          html.style.setProperty("--accent", "#818cf8");
+          localStorage.setItem("theme", "dark");
+        }
+      };
+    </script>
+
+    <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </body>
+</html>

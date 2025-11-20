@@ -1,0 +1,189 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TagPill from '../components/TagPill.astro';
+
+const description = "Projects and experiments I'm working on or have completed.";
+---
+
+<Layout title="Projects" description={description}>
+  <Header />
+
+  <main id="main" class="container mx-auto px-4 py-8 max-w-4xl">
+    <article class="prose prose-lg max-w-none">
+      <header class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-serif font-bold text-[var(--fg)] mb-6">
+          Projects
+        </h1>
+        <p class="text-xl text-[var(--fg)] opacity-80 leading-relaxed">
+          Things I'm building, experimenting with, and learning from.
+        </p>
+      </header>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-serif font-semibold text-[var(--fg)] mb-4">
+          Current Projects
+        </h2>
+
+        <div class="space-y-6">
+          <div class="border border-[var(--muted)] rounded-lg p-6 hover:border-[var(--accent)] transition-colors">
+            <div class="flex items-start justify-between mb-3">
+              <h3 class="text-xl font-serif font-semibold text-[var(--fg)]">
+                This Blog
+              </h3>
+              <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-xs font-medium">
+                Active
+              </span>
+            </div>
+            <p class="text-[var(--fg)] opacity-80 mb-4">
+              A personal blog built with Astro, focusing on clean design and great user experience.
+              Features include dark mode, search, and a content-first approach.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <TagPill tag="Astro" size="sm" />
+              <TagPill tag="Tailwind CSS" size="sm" />
+              <TagPill tag="TypeScript" size="sm" />
+              <TagPill tag="MDX" size="sm" />
+            </div>
+          </div>
+
+          <div class="border border-[var(--muted)] rounded-lg p-6 hover:border-[var(--accent)] transition-colors">
+            <div class="flex items-start justify-between mb-3">
+              <h3 class="text-xl font-serif font-semibold text-[var(--fg)]">
+                Learning Management System
+              </h3>
+              <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-xs font-medium">
+                In Progress
+              </span>
+            </div>
+            <p class="text-[var(--fg)] opacity-80 mb-4">
+              Building a modern LMS focused on developer education and interactive learning experiences.
+              Includes course authoring tools, progress tracking, and community features.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <TagPill tag="React" size="sm" />
+              <TagPill tag="Node.js" size="sm" />
+              <TagPill tag="PostgreSQL" size="sm" />
+              <TagPill tag="Docker" size="sm" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-serif font-semibold text-[var(--fg)] mb-4">
+          Completed Projects
+        </h2>
+
+        <div class="space-y-6">
+          <div class="border border-[var(--muted)] rounded-lg p-6 hover:border-[var(--accent)] transition-colors">
+            <div class="flex items-start justify-between mb-3">
+              <h3 class="text-xl font-serif font-semibold text-[var(--fg)]">
+                Task Management CLI
+              </h3>
+              <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900/30 text-gray-800 dark:text-gray-300 rounded-full text-xs font-medium">
+                Completed
+              </span>
+            </div>
+            <p class="text-[var(--fg)] opacity-80 mb-4">
+              A command-line task manager with features like project organization, time tracking,
+              and integration with popular productivity tools.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <TagPill tag="Python" size="sm" />
+              <TagPill tag="CLI" size="sm" />
+              <TagPill tag="SQLite" size="sm" />
+              <TagPill tag="Click" size="sm" />
+            </div>
+          </div>
+
+          <div class="border border-[var(--muted)] rounded-lg p-6 hover:border-[var(--accent)] transition-colors">
+            <div class="flex items-start justify-between mb-3">
+              <h3 class="text-xl font-serif font-semibold text-[var(--fg)]">
+                Weather Dashboard
+              </h3>
+              <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900/30 text-gray-800 dark:text-gray-300 rounded-full text-xs font-medium">
+                Completed
+              </span>
+            </div>
+            <p class="text-[var(--fg)] opacity-80 mb-4">
+              A responsive weather dashboard that aggregates data from multiple sources
+              and provides detailed forecasts with beautiful visualizations.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <TagPill tag="JavaScript" size="sm" />
+              <TagPill tag="Weather API" size="sm" />
+              <TagPill tag="Chart.js" size="sm" />
+              <TagPill tag="Responsive Design" size="sm" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-serif font-semibold text-[var(--fg)] mb-4">
+          Open Source Contributions
+        </h2>
+        <p class="text-[var(--fg)] opacity-90 mb-4">
+          I also contribute to various open source projects when I can. Some of my recent contributions include:
+        </p>
+        <ul class="text-[var(--fg)] opacity-90 space-y-2">
+          <li>• Bug fixes and feature additions to popular React libraries</li>
+          <li>• Documentation improvements for developer tools</li>
+          <li>• Performance optimizations for web applications</li>
+          <li>• Accessibility improvements across multiple projects</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-serif font-semibold text-[var(--fg)] mb-4">
+          What's Next?
+        </h2>
+        <p class="text-[var(--fg)] opacity-90 mb-4">
+          I'm always exploring new technologies and working on interesting problems. Currently interested in:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 border border-[var(--muted)] rounded-lg">
+            <h4 class="font-semibold text-[var(--fg)] mb-2">Machine Learning</h4>
+            <p class="text-sm text-[var(--fg)] opacity-70">
+              Exploring practical applications of ML in web development and productivity tools.
+            </p>
+          </div>
+          <div class="p-4 border border-[var(--muted)] rounded-lg">
+            <h4 class="font-semibold text-[var(--fg)] mb-2">Web Performance</h4>
+            <p class="text-sm text-[var(--fg)] opacity-70">
+              Optimizing web applications for speed, accessibility, and user experience.
+            </p>
+          </div>
+          <div class="p-4 border border-[var(--muted)] rounded-lg">
+            <h4 class="font-semibold text-[var(--fg)] mb-2">Developer Tools</h4>
+            <p class="text-sm text-[var(--fg)] opacity-70">
+              Building tools that make developers more productive and happy.
+            </p>
+          </div>
+          <div class="p-4 border border-[var(--muted)] rounded-lg">
+            <h4 class="font-semibold text-[var(--fg)] mb-2">Open Source</h4>
+            <p class="text-sm text-[var(--fg)] opacity-70">
+              Contributing to projects that benefit the developer community.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <div class="flex gap-4">
+          <a href="/connect" class="inline-flex items-center px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent)]/90 transition-colors">
+            Let's Collaborate
+          </a>
+          <a href="https://github.com" class="inline-flex items-center px-4 py-2 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-white transition-colors">
+            View on GitHub
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+

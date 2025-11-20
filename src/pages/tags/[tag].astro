@@ -1,0 +1,135 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import TagPill from '../../components/TagPill.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  const allTags = [...new Set(notes.flatMap(note => note.data.tags || []))];
+
+  return allTags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      notes: notes.filter(note => note.data.tags?.includes(tag))
+    },
+  }));
+}
+
+const { tag, notes } = Astro.props;
+
+// Filter published notes
+const publishedNotes = notes.filter(note =>
+  note.data.stage === 'published' || !note.data.stage
+);
+
+// Sort by date (newest first)
+const sortedNotes = publishedNotes.sort((a, b) => {
+  const dateA = a.data.pubDate ? new Date(a.data.pubDate).getTime() : 0;
+  const dateB = b.data.pubDate ? new Date(b.data.pubDate).getTime() : 0;
+  return dateB - dateA;
+});
+
+// Get related tags (tags that appear in notes with this tag)
+const allNotes = await getCollection('notes');
+const relatedTags = [...new Set(
+  notes.flatMap(note => note.data.tags || [])
+)].filter(t => t !== tag).slice(0, 6);
+
+const description = `Notes tagged with "${tag}". ${publishedNotes.length} published notes found.`;
+---
+
+<Layout title={`Tag: ${tag}`} description={description}>
+  <Header />
+
+  <main id="main" class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <a href="/tags" class="text-[var(--accent)] hover:underline">
+          ← Tags
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3 mb-4">
+        <h1 class="text-4xl font-serif font-bold text-[var(--fg)]">
+          {tag}
+        </h1>
+        <span class="bg-[var(--accent)] text-white px-3 py-1 rounded-full text-sm font-medium">
+          {publishedNotes.length}
+        </span>
+      </div>
+
+      <p class="text-[var(--fg)] opacity-70">
+        {publishedNotes.length === 1 ? '1 note' : `${publishedNotes.length} notes`}
+        {notes.length > publishedNotes.length && (
+          <span class="ml-2 text-[var(--fg)] opacity-40">
+            (+{notes.length - publishedNotes.length} drafts)
+          </span>
+        )}
+      </p>
+    </div>
+
+    <!-- Related Tags -->
+    {relatedTags.length > 0 && (
+      <div class="mb-8">
+        <h2 class="text-lg font-semibold text-[var(--fg)] mb-3">
+          Related Topics
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {relatedTags.map(relatedTag => (
+            <TagPill tag={relatedTag} href={`/tags/${relatedTag}`} size="sm" variant="outline" />
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Notes Grid -->
+    {publishedNotes.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {sortedNotes.map(note => (
+          <PostCard slug={note.slug} />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-12">
+        <div class="text-6xl mb-4">🏷️</div>
+        <h3 class="text-xl font-serif font-semibold text-[var(--fg)] mb-2">
+          No published notes yet
+        </h3>
+        <p class="text-[var(--fg)] opacity-70 mb-6">
+          {notes.length > 0
+            ? 'All notes with this tag are drafts. Check back later or browse other tags.'
+            : 'No notes with this tag yet. Be the first to write about it!'
+          }
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/notes" class="inline-flex items-center px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent)]/90 transition-colors">
+            Browse All Notes
+          </a>
+          <a href="/tags" class="inline-flex items-center px-4 py-2 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-white transition-colors">
+            All Tags
+          </a>
+        </div>
+      </div>
+    )}
+
+    <!-- Back Navigation -->
+    {publishedNotes.length > 0 && (
+      <div class="flex justify-between items-center pt-8 border-t border-[var(--muted)]">
+        <a href="/tags" class="text-[var(--accent)] hover:underline">
+          ← Back to All Tags
+        </a>
+        <a href="/notes" class="text-[var(--fg)] opacity-70 hover:opacity-100 hover:text-[var(--accent)] transition-colors">
+          All Notes →
+        </a>
+      </div>
+    )}
+  </main>
+
+  <Footer />
+</Layout>
+

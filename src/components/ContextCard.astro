@@ -1,0 +1,48 @@
+---
+export interface Props {
+  context?: string;
+  stage?: 'idea' | 'draft' | 'published';
+  confidence?: 'low' | 'med' | 'high';
+  mood?: 'excited' | 'curious' | 'focused' | 'neutral';
+  className?: string;
+}
+
+const {
+  context,
+  stage,
+  confidence,
+  mood,
+  className = ''
+} = Astro.props;
+
+// Don't render if no context data is provided
+if (!context && !stage && !confidence && !mood) {
+  // This will render nothing
+}
+---
+
+{context || stage || confidence || mood ? (
+  <aside class={`rounded-xl border p-4 bg-[var(--bg)]/60 border-[var(--muted)] ${className}`}>
+    {context && <p class="mb-3 text-[var(--fg)]">{context}</p>}
+    {(stage || confidence || mood) && (
+      <div class="text-sm opacity-80 flex gap-3 flex-wrap">
+        {stage && (
+          <span class="inline-flex items-center px-2 py-1 rounded-md bg-[var(--muted)] text-[var(--fg)]">
+            Stage: {stage}
+          </span>
+        )}
+        {confidence && (
+          <span class="inline-flex items-center px-2 py-1 rounded-md bg-[var(--muted)] text-[var(--fg)]">
+            Confidence: {confidence}
+          </span>
+        )}
+        {mood && (
+          <span class="inline-flex items-center px-2 py-1 rounded-md bg-[var(--muted)] text-[var(--fg)]">
+            Mood: {mood}
+          </span>
+        )}
+      </div>
+    )}
+  </aside>
+) : null}
+

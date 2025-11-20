@@ -1,0 +1,102 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-[var(--muted)] bg-[var(--bg)]/80 backdrop-blur-sm">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo/Brand -->
+      <a href="/" class="text-2xl font-serif font-bold text-[var(--fg)] hover:text-[var(--accent)] transition-colors">
+        Notes
+      </a>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Home
+        </a>
+        <a href="/notes" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Notes
+        </a>
+        <a href="/tags" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Tags
+        </a>
+        <a href="/search" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Search
+        </a>
+        <a href="/about" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          About
+        </a>
+        <a href="/projects" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Projects
+        </a>
+        <a href="/connect" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Connect
+        </a>
+      </nav>
+
+      <!-- Theme Toggle and Mobile Menu -->
+      <div class="flex items-center space-x-4">
+        <ThemeToggle />
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-button"
+          class="md:hidden p-2 rounded-lg hover:bg-[var(--muted)] transition-colors"
+          aria-label="Toggle mobile menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-[var(--muted)]">
+      <div class="flex flex-col space-y-4 pt-4">
+        <a href="/" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Home
+        </a>
+        <a href="/notes" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Notes
+        </a>
+        <a href="/tags" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Tags
+        </a>
+        <a href="/search" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Search
+        </a>
+        <a href="/about" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          About
+        </a>
+        <a href="/projects" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Projects
+        </a>
+        <a href="/connect" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+          Connect
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenuButton.contains(e.target as Node) && !mobileMenu.contains(e.target as Node)) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  }
+</script>
+

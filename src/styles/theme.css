@@ -1,0 +1,92 @@
+/* Theme CSS Variables */
+:root {
+  --bg: #ffffff;
+  --fg: #0f172a;
+  --muted: #e2e8f0;
+  --accent: #6366f1;
+}
+
+html {
+  --bg: #ffffff;
+  --fg: #0f172a;
+  --muted: #e2e8f0;
+  --accent: #6366f1;
+}
+
+html.dark {
+  --bg: #0b1220;
+  --fg: #e5e7eb;
+  --muted: #1f2937;
+  --accent: #818cf8;
+}
+
+/* Ensure CSS variables are available immediately */
+html:not(.dark) {
+  --bg: #ffffff;
+  --fg: #0f172a;
+  --muted: #e2e8f0;
+  --accent: #6366f1;
+}
+
+html.dark {
+  --bg: #0b1220;
+  --fg: #e5e7eb;
+  --muted: #1f2937;
+  --accent: #818cf8;
+}
+
+/* Theme-aware utilities */
+.theme-light {
+  --bg: #ffffff;
+  --fg: #0f172a;
+  --muted: #e2e8f0;
+  --accent: #6366f1;
+}
+
+.theme-dark {
+  --bg: #0b1220;
+  --fg: #e5e7eb;
+  --muted: #1f2937;
+  --accent: #818cf8;
+}
+
+/* Callout styles */
+.callout {
+  border-left: 4px solid var(--accent);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  background-color: var(--bg);
+  border-right: 1px solid var(--muted);
+  border-top: 1px solid var(--muted);
+  border-bottom: 1px solid var(--muted);
+}
+
+.callout.note {
+  border-left-color: #3b82f6;
+}
+
+.callout.tip {
+  border-left-color: #10b981;
+}
+
+.callout.warn {
+  border-left-color: #f59e0b;
+}
+
+/* Progress bar */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #6366f1);
+  transform-origin: left;
+  z-index: 1000;
+  transition: transform 0.1s ease-out;
+}
+
+html.dark .progress-bar {
+  background: linear-gradient(90deg, #818cf8, #818cf8);
+}

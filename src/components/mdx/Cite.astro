@@ -1,0 +1,32 @@
+---
+export interface Props {
+  href: string;
+  title?: string;
+  author?: string;
+  children: any;
+}
+
+const { href, title, author, children } = Astro.props;
+---
+
+<figure class="my-6 p-4 border-l-4 border-[var(--accent)] bg-[var(--muted)]/30 rounded-r-lg">
+  <blockquote class="text-[var(--fg)] opacity-90 mb-3">
+    <slot />
+  </blockquote>
+  <footer class="text-sm text-[var(--fg)] opacity-70">
+    {title && <cite class="font-medium">"{title}"</cite>}
+    {title && author && <span class="mx-2">—</span>}
+    {author && <span>{author}</span>}
+    {href && (
+      <a
+        href={href}
+        class="ml-2 text-[var(--accent)] hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        [Source]
+      </a>
+    )}
+  </footer>
+</figure>
+

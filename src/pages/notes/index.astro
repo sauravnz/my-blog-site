@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import TagPill from '../../components/TagPill.astro';
+import { getCollection } from 'astro:content';
+
+// Get all notes for filtering
+const allNotes = await getCollection('notes');
+const allTags = [...new Set(allNotes.flatMap(note => note.data.tags || []))].sort();
+
+// Filter published notes
+const publishedNotes = allNotes.filter(note =>
+  note.data.stage === 'published' || !note.data.stage
+).sort((a, b) => {
+  const dateA = a.data.pubDate ? new Date(a.data.pubDate).getTime() : 0;
+  const dateB = b.data.pubDate ? new Date(b.data.pubDate).getTime() : 0;
+  return dateB - dateA;
+});
+
+const description = "Browse all published notes and discover new ideas.";
+---
+
+<Layout title="Notes" description={description}>
+  <Header />
+
+  <main id="main" class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-serif font-bold text-[var(--fg)] mb-4">
+        All Notes
+      </h1>
+      <p class="text-[var(--fg)] opacity-70">
+        {publishedNotes.length} published note{publishedNotes.length !== 1 ? 's' : ''} • <a href="/search" class="text-[var(--accent)] hover:underline">Search notes</a> • <a href="/tags" class="text-[var(--accent)] hover:underline">Browse by topic</a>
+      </p>
+    </div>
+
+    <!-- Quick Filters -->
+    <div class="mb-8">
+      <div class="flex flex-wrap gap-2">
+        <span class="text-sm text-[var(--fg)] opacity-60 self-center mr-2">Popular topics:</span>
+        {allTags.slice(0, 6).map(tag => (
+          <a href={`/tags/${tag}`} class="px-3 py-2 rounded-lg transition-colors font-medium bg-[var(--muted)] text-[var(--fg)] hover:bg-[var(--accent)] hover:text-white">
+            {tag}
+          </a>
+        ))}
+        <a href="/tags" class="px-3 py-2 text-[var(--accent)] hover:underline font-medium">
+          All topics →
+        </a>
+      </div>
+    </div>
+
+    <!-- Notes Grid -->
+    {publishedNotes.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {publishedNotes.map(note => (
+          <PostCard slug={note.slug} />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-12">
+        <div class="text-6xl mb-4">📝</div>
+        <h3 class="text-xl font-serif font-semibold text-[var(--fg)] mb-2">
+          No notes yet
+        </h3>
+        <p class="text-[var(--fg)] opacity-70 mb-6">
+          Start writing your first note to get started.
+        </p>
+        <a href="/search" class="inline-flex items-center px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent)]/90 transition-colors mr-3">
+          Search All Content
+        </a>
+        <a href="/tags" class="inline-flex items-center px-4 py-2 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-white transition-colors">
+          Browse Topics
+        </a>
+      </div>
+    )}
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center pt-8 border-t border-[var(--muted)]">
+      <a href="/" class="text-[var(--accent)] hover:underline">
+        ← Back to Home
+      </a>
+      <div class="flex gap-4">
+        <a href="/search" class="text-[var(--fg)] opacity-70 hover:opacity-100 hover:text-[var(--accent)] transition-colors">
+          Search
+        </a>
+        <span class="text-[var(--fg)] opacity-30">•</span>
+        <a href="/tags" class="text-[var(--fg)] opacity-70 hover:opacity-100 hover:text-[var(--accent)] transition-colors">
+          Tags
+        </a>
+        <span class="text-[var(--fg)] opacity-30">•</span>
+        <a href="/rss.xml" class="text-[var(--fg)] opacity-70 hover:opacity-100 hover:text-[var(--accent)] transition-colors">
+          RSS
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

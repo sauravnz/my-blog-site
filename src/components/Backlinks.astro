@@ -1,0 +1,46 @@
+---
+export interface Props {
+  currentSlug: string;
+  backlinks: Array<{ slug: string; title: string; excerpt?: string }>;
+  className?: string;
+}
+
+const { currentSlug, backlinks, className = '' } = Astro.props;
+---
+
+{backlinks && backlinks.length > 0 ? (
+  <aside class={`rounded-xl border p-4 bg-[var(--bg)]/60 border-[var(--muted)] ${className}`}>
+    <h3 class="text-lg font-serif font-semibold text-[var(--fg)] mb-3">
+      Mentioned in
+    </h3>
+    <ul class="space-y-3">
+      {backlinks.map(link => (
+        <li>
+          <a
+            href={`/notes/${link.slug}`}
+            class="block p-3 rounded-lg hover:bg-[var(--muted)] transition-colors"
+          >
+            <h4 class="font-medium text-[var(--fg)] hover:text-[var(--accent)] transition-colors">
+              {link.title}
+            </h4>
+            {link.excerpt && (
+              <p class="text-sm text-[var(--fg)] opacity-70 mt-1 line-clamp-2">
+                {link.excerpt}
+              </p>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+) : null}
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+

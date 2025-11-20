@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import TagPill from './TagPill.astro';
+
+export interface Props {
+  slug: string;
+  featured?: boolean;
+  className?: string;
+}
+
+const { slug, featured = false, className = '' } = Astro.props;
+
+// Get the note data
+const notes = await getCollection('notes');
+const note = notes.find(n => n.slug === slug);
+
+if (!note) {
+  throw new Error(`Note with slug "${slug}" not found`);
+}
+
+const { title, description, pubDate, tags } = note.data;
+const formattedDate = pubDate ? new Date(pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}) : null;
+
+const cardClasses = featured
+  ? 'bg-[var(--bg)] border border-[var(--muted)] rounded-xl p-6 hover:shadow-lg transition-shadow'
+  : 'bg-[var(--bg)] border border-[var(--muted)] rounded-lg p-4 hover:border-[var(--accent)] transition-colors';
+---
+
+<article class={`${cardClasses} ${className}`}>
+  <div class="flex flex-col h-full">
+    <!-- Header -->
+    <header class="mb-3">
+      <div class="flex items-start justify-between mb-2">
+        <h3 class="text-xl font-serif font-semibold text-[var(--fg)] hover:text-[var(--accent)] transition-colors">
+          <a href={`/notes/${slug}`}>
+            {title}
+          </a>
+        </h3>
+        {featured && (
+          <span class="ml-2 px-2 py-1 text-xs bg-[var(--accent)] text-white rounded-full font-medium">
+            Featured
+          </span>
+        )}
+      </div>
+
+      {description && (
+        <p class="text-[var(--fg)] opacity-80 text-sm mb-3 line-clamp-2">
+          {description}
+        </p>
+      )}
+
+      {formattedDate && (
+        <time class="text-xs text-[var(--fg)] opacity-60" datetime={pubDate}>
+          {formattedDate}
+        </time>
+      )}
+    </header>
+
+    <!-- Tags -->
+    {tags && tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mt-auto">
+        {tags.slice(0, 3).map(tag => (
+          <TagPill tag={tag} href={`/tags/${tag}`} size="sm" />
+        ))}
+        {tags.length > 3 && (
+          <span class="text-xs text-[var(--fg)] opacity-60 self-center">
+            +{tags.length - 3} more
+          </span>
+        )}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+

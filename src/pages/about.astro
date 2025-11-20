@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const description = "Learn more about this personal blog and the person behind it.";
+---
+
+<Layout title="About" description={description}>
+  <Header />
+
+  <main id="main" class="container mx-auto px-4 py-8 max-w-3xl">
+    <article class="prose prose-lg max-w-none">
+      <header class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-serif font-bold text-[var(--fg)] mb-6">
+          About
+        </h1>
+        <p class="text-xl text-[var(--fg)] opacity-80 leading-relaxed">
+          Welcome to my corner of the internet where I share thoughts, ideas, and discoveries.
+        </p>
+      </header>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-serif font-semibold text-[var(--fg)] mb-4">
+          What is this place?
+        </h2>
+        <p class="text-[var(--fg)] opacity-90 mb-4">
+          This is my personal blog and digital garden where I write about topics that interest me.
+          You'll find notes on technology, productivity, learning, and whatever else catches my attention.
+        </p>
+        <p class="text-[var(--fg)] opacity-90 mb-4">
+          I believe in the power of writing to clarify thinking and sharing knowledge to help others.
+          These notes are as much for my own reference as they are for anyone who might find them useful.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-serif font-semibold text-[var(--fg)] mb-4">
+          Why a blog?
+        </h2>
+        <p class="text-[var(--fg)] opacity-90 mb-4">
+          Writing forces me to think deeply about topics and organize my thoughts. It's also a way to
+          contribute back to the communities that have helped me learn and grow.
+        </p>
+        <p class="text-[var(--fg)] opacity-90 mb-4">
+          I aim to write clearly and practically, focusing on real insights rather than fluff.
+          If you find something useful here, that's great. If not, I hope you find what you're looking for elsewhere.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-serif font-semibold text-[var(--fg)] mb-4">
+          Technology
+        </h2>
+        <p class="text-[var(--fg)] opacity-90 mb-4">
+          This site is built with modern web technologies that I find interesting:
+        </p>
+        <ul class="text-[var(--fg)] opacity-90 space-y-2">
+          <li><strong>Astro</strong> - For static site generation and great performance</li>
+          <li><strong>Tailwind CSS</strong> - For utility-first styling</li>
+          <li><strong>MDX</strong> - For writing content with React components</li>
+          <li><strong>TypeScript</strong> - For type safety and better development experience</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-serif font-semibold text-[var(--fg)] mb-4">
+          Get in touch
+        </h2>
+        <p class="text-[var(--fg)] opacity-90 mb-4">
+          I'm always happy to hear from readers. Whether you have questions, suggestions,
+          or just want to say hello, feel free to reach out through the contact page.
+        </p>
+        <div class="flex gap-4">
+          <a href="/connect" class="inline-flex items-center px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent)]/90 transition-colors">
+            Get in Touch
+          </a>
+          <a href="/notes" class="inline-flex items-center px-4 py-2 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-white transition-colors">
+            Read Notes
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+

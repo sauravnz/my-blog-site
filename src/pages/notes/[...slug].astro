@@ -1,0 +1,230 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ContextCard from '../../components/ContextCard.astro';
+import Backlinks from '../../components/Backlinks.astro';
+import TagPill from '../../components/TagPill.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map((note) => ({
+    params: { slug: note.slug },
+    props: note,
+  }));
+}
+
+const note = Astro.props;
+const { Content, headings } = await note.render();
+
+const { title, description, pubDate, tags, context, stage, confidence, mood, noindex } = note.data;
+
+const formattedDate = pubDate ? new Date(pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}) : null;
+
+// Get all notes for backlinks
+const allNotes = await getCollection('notes');
+
+// Note: Backlinks will be loaded from JSON file at runtime
+const backlinks = []; // Will be populated by client-side script
+
+// Generate structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": pubDate,
+  "dateModified": pubDate,
+  "author": {
+    "@type": "Person",
+    "name": "Author" // This should be customizable
+  },
+  "keywords": tags?.join(", "),
+  "articleSection": "Notes",
+  "url": `https://yourdomain.tld/notes/${note.slug}` // Update with actual domain
+};
+
+const pageDescription = description || `${title} - Personal notes and thoughts`;
+---
+
+<Layout title={title} description={pageDescription} noindex={noindex}>
+  <Header />
+
+  <main id="main" class="container mx-auto px-4 py-8 max-w-4xl">
+    <article class="prose prose-lg max-w-none">
+      <!-- Article Header -->
+      <header class="mb-8 pb-8 border-b border-[var(--muted)]">
+        <div class="flex items-center gap-2 text-sm text-[var(--fg)] opacity-60 mb-4">
+          <time datetime={pubDate}>{formattedDate}</time>
+          {stage && (
+            <>
+              <span>•</span>
+              <span class="capitalize">{stage}</span>
+            </>
+          )}
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-serif font-bold text-[var(--fg)] mb-6">
+          {title}
+        </h1>
+
+        {description && (
+          <p class="text-xl text-[var(--fg)] opacity-80 mb-6 leading-relaxed">
+            {description}
+          </p>
+        )}
+
+        <!-- Tags -->
+        {tags && tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-6">
+            {tags.map(tag => (
+              <TagPill tag={tag} href={`/tags/${tag}`} size="md" />
+            ))}
+          </div>
+        )}
+
+        <!-- Context Card -->
+        {(context || stage || confidence || mood) && (
+          <ContextCard context={context} stage={stage} confidence={confidence} mood={mood} />
+        )}
+      </header>
+
+      <!-- Table of Contents (if there are headings) -->
+      {headings.length > 0 && (
+        <nav class="toc mb-8 p-4 bg-[var(--muted)]/30 rounded-lg">
+          <h3 class="font-semibold text-[var(--fg)] mb-3">Table of Contents</h3>
+          <ol class="space-y-1">
+            {headings.filter(h => h.depth <= 3).map((heading, index) => (
+              <li style={`padding-left: ${(heading.depth - 1) * 1}rem`}>
+                <a
+                  href={`#${heading.slug}`}
+                  class="text-[var(--fg)] opacity-70 hover:opacity-100 hover:text-[var(--accent)] transition-colors text-sm"
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+
+      <!-- Article Content -->
+      <div class="prose prose-lg prose-headings:font-serif prose-headings:text-fg prose-p:text-fg prose-p:opacity-90 prose-a:text-accent prose-strong:text-fg prose-code:text-fg prose-code:bg-muted prose-pre:bg-muted prose-blockquote:border-accent prose-blockquote:text-fg max-w-none">
+        <Content />
+      </div>
+
+      <!-- Backlinks -->
+      <footer class="mt-12 pt-8 border-t border-[var(--muted)]" data-backlinks-container>
+        <Backlinks currentSlug={note.slug} backlinks={backlinks} />
+      </footer>
+
+      <!-- Article Footer -->
+      <footer class="mt-12 pt-8 border-t border-[var(--muted)]">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div class="flex flex-wrap gap-2">
+            {tags && tags.map(tag => (
+              <TagPill tag={tag} href={`/tags/${tag}`} size="sm" />
+            ))}
+          </div>
+
+          <div class="text-sm text-[var(--fg)] opacity-60">
+            Last updated: {formattedDate}
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="mt-8 flex justify-between items-center">
+          <a
+            href="/notes"
+            class="inline-flex items-center text-[var(--accent)] hover:underline"
+          >
+            ← Back to Notes
+          </a>
+
+          <div class="flex gap-2">
+            <a
+              href={`/notes`}
+              class="text-[var(--fg)] opacity-60 hover:opacity-100 hover:text-[var(--accent)] transition-colors"
+              title="View all notes"
+            >
+              All Notes
+            </a>
+            <span class="text-[var(--fg)] opacity-30">•</span>
+            <a
+              href="/tags"
+              class="text-[var(--fg)] opacity-60 hover:opacity-100 hover:text-[var(--accent)] transition-colors"
+              title="Browse by tags"
+            >
+              Tags
+            </a>
+          </div>
+        </div>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+  <!-- Load Backlinks -->
+  <script>
+    async function loadBacklinks(currentSlug) {
+      try {
+        const response = await fetch('/backlinks.json');
+        const backlinksMap = await response.json();
+
+        const backlinks = backlinksMap[currentSlug] || [];
+
+        // Update backlinks component
+        const backlinksContainer = document.querySelector('[data-backlinks-container]');
+        if (backlinksContainer && backlinks.length > 0) {
+          backlinksContainer.innerHTML = `
+            <aside class="rounded-xl border p-4 bg-[var(--bg)]/60 border-[var(--muted)]">
+              <h3 class="text-lg font-serif font-semibold text-[var(--fg)] mb-3">
+                Mentioned in
+              </h3>
+              <ul class="space-y-3">
+                ${backlinks.map(link => `
+                  <li>
+                    <a
+                      href="/notes/${link.slug}"
+                      class="block p-3 rounded-lg hover:bg-[var(--muted)] transition-colors"
+                    >
+                      <h4 class="font-medium text-[var(--fg)] hover:text-[var(--accent)] transition-colors">
+                        ${link.title}
+                      </h4>
+                      ${link.excerpt ? `
+                        <p class="text-sm text-[var(--fg)] opacity-70 mt-1 line-clamp-2">
+                          ${link.excerpt}
+                        </p>
+                      ` : ''}
+                    </a>
+                  </li>
+                `).join('')}
+              </ul>
+            </aside>
+          `;
+        } else if (backlinksContainer) {
+          backlinksContainer.remove();
+        }
+      } catch (error) {
+        console.error('Failed to load backlinks:', error);
+      }
+    }
+
+    // Load backlinks on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentSlug = window.location.pathname.split('/').pop();
+      if (currentSlug) {
+        loadBacklinks(currentSlug);
+      }
+    });
+  </script>
+
+  <Footer />
+</Layout>

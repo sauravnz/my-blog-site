@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+import TagPill from '../components/TagPill.astro';
+import { getCollection } from 'astro:content';
+
+// Get all notes
+const notes = await getCollection('notes');
+
+// Filter featured and published notes
+const featuredNotes = notes.filter(note =>
+  note.data.featured && note.data.stage === 'published'
+);
+
+const publishedNotes = notes.filter(note =>
+  note.data.stage === 'published' || !note.data.stage
+);
+
+// Get latest notes (excluding featured ones that are already shown)
+const latestNotes = publishedNotes
+  .filter(note => !note.data.featured)
+  .sort((a, b) => {
+    const dateA = a.data.pubDate ? new Date(a.data.pubDate).getTime() : 0;
+    const dateB = b.data.pubDate ? new Date(b.data.pubDate).getTime() : 0;
+    return dateB - dateA;
+  })
+  .slice(0, 6);
+
+// Get all unique tags
+const allTags = [...new Set(notes.flatMap(note => note.data.tags || []))].sort();
+
+// Get recent tags (most used)
+const tagCounts = allTags.map(tag => ({
+  tag,
+  count: notes.filter(note => note.data.tags?.includes(tag)).length
+})).sort((a, b) => b.count - a.count).slice(0, 10);
+
+const description = "Personal notes, thoughts, and discoveries. A clean, elegant space for ideas and learning.";
+---
+
+<Layout title="Home" description={description}>
+  <Header />
+
+  <main id="main" class="container mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <section class="text-center mb-16">
+      <h1 class="text-5xl md:text-6xl font-serif font-bold text-[var(--fg)] mb-6">
+        Welcome to my
+        <span class="text-[var(--accent)]">Notes</span>
+      </h1>
+      <p class="text-xl text-[var(--fg)] opacity-80 max-w-3xl mx-auto mb-8 leading-relaxed">
+        A personal space for thoughts, ideas, and discoveries. Built with Astro, designed for clarity.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        <a href="/notes" class="px-6 py-3 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent)]/90 transition-colors font-medium">
+          Browse Notes
+        </a>
+        <a href="/tags" class="px-6 py-3 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-white transition-colors font-medium">
+          Explore Tags
+        </a>
+        <a href="/search" class="px-6 py-3 border border-[var(--muted)] text-[var(--fg)] rounded-lg hover:border-[var(--accent)] transition-colors font-medium">
+          Search
+        </a>
+      </div>
+    </section>
+
+    <!-- Featured Notes -->
+    {featuredNotes.length > 0 && (
+      <section class="mb-16">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-serif font-bold text-[var(--fg)]">
+            Featured Notes
+          </h2>
+          <a href="/notes" class="text-[var(--accent)] hover:underline font-medium">
+            View all →
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {featuredNotes.slice(0, 4).map(note => (
+            <PostCard slug={note.slug} featured={true} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Latest Notes -->
+    {latestNotes.length > 0 && (
+      <section class="mb-16">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-serif font-bold text-[var(--fg)]">
+            Latest Notes
+          </h2>
+          <a href="/notes" class="text-[var(--accent)] hover:underline font-medium">
+            View all →
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {latestNotes.map(note => (
+            <PostCard slug={note.slug} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Popular Tags -->
+    {tagCounts.length > 0 && (
+      <section class="mb-16">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-serif font-bold text-[var(--fg)]">
+            Popular Topics
+          </h2>
+          <a href="/tags" class="text-[var(--accent)] hover:underline font-medium">
+            View all →
+          </a>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          {tagCounts.map(({ tag, count }) => (
+            <TagPill tag={`${tag} (${count})`} href={`/tags/${tag}`} size="md" />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Stats -->
+    <section class="bg-[var(--muted)]/30 rounded-xl p-8 text-center">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <div class="text-3xl font-bold text-[var(--accent)] mb-2">
+            {notes.length}
+          </div>
+          <div class="text-[var(--fg)] opacity-70">
+            Total Notes
+          </div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-[var(--accent)] mb-2">
+            {allTags.length}
+          </div>
+          <div class="text-[var(--fg)] opacity-70">
+            Topics
+          </div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-[var(--accent)] mb-2">
+            {featuredNotes.length}
+          </div>
+          <div class="text-[var(--fg)] opacity-70">
+            Featured
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

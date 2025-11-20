@@ -1,0 +1,81 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import TagPill from '../../components/TagPill.astro';
+import { getCollection } from 'astro:content';
+
+const notes = await getCollection('notes');
+
+// Get all unique tags and their counts
+const allTags = [...new Set(notes.flatMap(note => note.data.tags || []))];
+const tagCounts = allTags.map(tag => ({
+  tag,
+  count: notes.filter(note => note.data.tags?.includes(tag)).length,
+  publishedCount: notes.filter(note =>
+    note.data.tags?.includes(tag) &&
+    (note.data.stage === 'published' || !note.data.stage)
+  ).length
+})).sort((a, b) => b.publishedCount - a.publishedCount);
+
+const description = `Browse all topics and tags. ${tagCounts.length} topics with ${tagCounts.reduce((sum, tag) => sum + tag.publishedCount, 0)} notes.`;
+---
+
+<Layout title="Tags" description={description}>
+  <Header />
+
+  <main id="main" class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-serif font-bold text-[var(--fg)] mb-4">
+        All Topics
+      </h1>
+      <p class="text-[var(--fg)] opacity-70">
+        Browse notes by topic. {tagCounts.length} topics, {tagCounts.reduce((sum, tag) => sum + tag.publishedCount, 0)} published notes.
+      </p>
+    </div>
+
+    <!-- Tags Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {tagCounts.map(({ tag, count, publishedCount }) => (
+        <a
+          href={`/tags/${tag}`}
+          class="group block p-4 border border-[var(--muted)] rounded-lg hover:border-[var(--accent)] hover:shadow-md transition-all duration-200"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-semibold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">
+              {tag}
+            </h3>
+            <span class="text-xs bg-[var(--accent)] text-white px-2 py-1 rounded-full">
+              {publishedCount}
+            </span>
+          </div>
+          <p class="text-sm text-[var(--fg)] opacity-60">
+            {publishedCount === 1 ? '1 note' : `${publishedCount} notes`}
+            {count > publishedCount && (
+              <span class="ml-1 text-[var(--fg)] opacity-40">
+                (+{count - publishedCount} drafts)
+              </span>
+            )}
+          </p>
+        </a>
+      ))}
+    </div>
+
+    <!-- Empty state -->
+    {tagCounts.length === 0 && (
+      <div class="text-center py-12">
+        <div class="text-6xl mb-4">🏷️</div>
+        <h3 class="text-xl font-serif font-semibold text-[var(--fg)] mb-2">
+          No tags yet
+        </h3>
+        <p class="text-[var(--fg)] opacity-70">
+          Tags will appear here as you add notes with tags.
+        </p>
+      </div>
+    )}
+  </main>
+
+  <Footer />
+</Layout>
+
