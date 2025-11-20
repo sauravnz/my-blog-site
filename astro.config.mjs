@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
@@ -30,13 +32,13 @@ export default defineConfig({
       theme: 'github-dark-default',
       langs: ['javascript', 'typescript', 'python', 'bash', 'json', 'yaml', 'markdown', 'css', 'html']
     },
-    remarkPlugins: ['remark-math'],
-    rehypePlugins: [['rehype-katex', { strict: false }]]
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [[rehypeKatex, { strict: false }]]
   },
 
   mdx: {
-    remarkPlugins: ['remark-math'],
-    rehypePlugins: [['rehype-katex', { strict: false }]],
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [[rehypeKatex, { strict: false }]],
     // Define custom MDX components/shortcodes
     components: {
       Context: './src/components/mdx/Context.astro',
