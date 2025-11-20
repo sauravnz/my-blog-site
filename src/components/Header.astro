@@ -2,35 +2,35 @@
 import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<header class="sticky top-0 z-40 w-full border-b border-[var(--muted)] bg-[var(--bg)]/80 backdrop-blur-sm">
-  <div class="container mx-auto px-4 py-4">
+<header class="sticky top-0 z-40 w-full border-b border-[var(--border-light)] bg-[var(--bg)]/95 backdrop-blur-md">
+  <div class="container mx-auto px-4 py-5">
     <div class="flex items-center justify-between">
-      <!-- Logo/Brand -->
-      <a href="/" class="text-2xl font-serif font-bold text-[var(--fg)] hover:text-[var(--accent)] transition-colors">
+      <!-- Logo/Brand - Elegant Serif -->
+      <a href="/" class="text-3xl md:text-4xl font-serif font-bold text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
         Notes
       </a>
 
-      <!-- Navigation -->
+      <!-- Navigation - Elegant -->
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="/" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Home
         </a>
-        <a href="/notes" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/notes" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Notes
         </a>
-        <a href="/tags" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/tags" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Tags
         </a>
-        <a href="/search" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/search" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Search
         </a>
-        <a href="/about" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/about" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           About
         </a>
-        <a href="/projects" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/projects" class="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors font-medium">
           Projects
         </a>
-        <a href="/connect" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/connect" class="px-6 py-2.5 bg-[var(--accent)] text-white rounded-full hover:bg-[var(--accent-hover)] transition-all font-medium shadow-elegant-sm hover:shadow-elegant">
           Connect
         </a>
       </nav>
@@ -39,41 +39,41 @@ import ThemeToggle from './ThemeToggle.astro';
       <div class="flex items-center space-x-4">
         <ThemeToggle />
 
-        <!-- Mobile menu button -->
+        <!-- Mobile menu button - Elegant -->
         <button
           id="mobile-menu-button"
           class="md:hidden p-2 rounded-lg hover:bg-[var(--muted)] transition-colors"
           aria-label="Toggle mobile menu"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Navigation -->
-    <nav id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-[var(--muted)]">
-      <div class="flex flex-col space-y-4 pt-4">
-        <a href="/" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+    <!-- Mobile Navigation - Elegant -->
+    <nav id="mobile-menu" class="hidden md:hidden mt-6 pb-4 border-t border-[var(--border-light)]">
+      <div class="flex flex-col space-y-3 pt-6">
+        <a href="/" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Home
         </a>
-        <a href="/notes" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/notes" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Notes
         </a>
-        <a href="/tags" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/tags" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Tags
         </a>
-        <a href="/search" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/search" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Search
         </a>
-        <a href="/about" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/about" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           About
         </a>
-        <a href="/projects" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/projects" class="px-4 py-2.5 text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--muted)] rounded-lg transition-all font-medium">
           Projects
         </a>
-        <a href="/connect" class="text-[var(--fg)] hover:text-[var(--accent)] transition-colors font-medium">
+        <a href="/connect" class="px-4 py-2.5 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-all font-medium text-center shadow-elegant-sm">
           Connect
         </a>
       </div>
@@ -99,4 +99,3 @@ import ThemeToggle from './ThemeToggle.astro';
     });
   }
 </script>
-

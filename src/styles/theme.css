@@ -1,92 +1,479 @@
-/* Theme CSS Variables */
+/* Elegant Serif Theme */
+
 :root {
-  --bg: #ffffff;
-  --fg: #0f172a;
-  --muted: #e2e8f0;
-  --accent: #6366f1;
+  /* Base Colors - Warm and Inviting */
+  --bg: #fdfcfb;
+  --fg: #1a1a1a;
+  --muted: #f5f3f0;
+  --accent: #2c5f7c;
+  --accent-hover: #234a61;
+  
+  /* Semantic Colors */
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-muted: #737373;
+  --border-light: #e8e5e1;
+  --border-medium: #d4cfc8;
+  
+  /* Accent Variations */
+  --accent-light: #e8f2f7;
+  --accent-soft: #b8d4e3;
+  
+  /* Success/Info Colors */
+  --success: #2d7a5f;
+  --info: #2c5f7c;
+  --warning: #c17a3a;
+  
+  /* Typography */
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
 }
 
 html {
-  --bg: #ffffff;
-  --fg: #0f172a;
-  --muted: #e2e8f0;
-  --accent: #6366f1;
+  --bg: #fdfcfb;
+  --fg: #1a1a1a;
+  --muted: #f5f3f0;
+  --accent: #2c5f7c;
+  --accent-hover: #234a61;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-muted: #737373;
+  --border-light: #e8e5e1;
+  --border-medium: #d4cfc8;
+  --accent-light: #e8f2f7;
+  --accent-soft: #b8d4e3;
 }
 
 html.dark {
-  --bg: #0b1220;
-  --fg: #e5e7eb;
-  --muted: #1f2937;
-  --accent: #818cf8;
+  --bg: #1a1a1a;
+  --fg: #f5f3f0;
+  --muted: #2a2a2a;
+  --accent: #7ba8c4;
+  --accent-hover: #96bdd4;
+  --text-primary: #f5f3f0;
+  --text-secondary: #d4cfc8;
+  --text-muted: #a8a39a;
+  --border-light: #3a3a3a;
+  --border-medium: #4a4a4a;
+  --accent-light: #2a3a42;
+  --accent-soft: #3a5060;
+  --success: #5fb88f;
+  --info: #7ba8c4;
+  --warning: #d9a66a;
 }
 
 /* Ensure CSS variables are available immediately */
 html:not(.dark) {
-  --bg: #ffffff;
-  --fg: #0f172a;
-  --muted: #e2e8f0;
-  --accent: #6366f1;
+  --bg: #fdfcfb;
+  --fg: #1a1a1a;
+  --muted: #f5f3f0;
+  --accent: #2c5f7c;
+  --text-primary: #1a1a1a;
 }
 
 html.dark {
-  --bg: #0b1220;
-  --fg: #e5e7eb;
-  --muted: #1f2937;
-  --accent: #818cf8;
+  --bg: #1a1a1a;
+  --fg: #f5f3f0;
+  --muted: #2a2a2a;
+  --accent: #7ba8c4;
+  --text-primary: #f5f3f0;
 }
 
-/* Theme-aware utilities */
-.theme-light {
-  --bg: #ffffff;
-  --fg: #0f172a;
-  --muted: #e2e8f0;
-  --accent: #6366f1;
+/* Elegant Base Styles */
+* {
+  box-sizing: border-box;
 }
 
-.theme-dark {
-  --bg: #0b1220;
-  --fg: #e5e7eb;
-  --muted: #1f2937;
-  --accent: #818cf8;
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Callout styles */
+/* Elegant Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+
+/* Elegant Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* Elegant Buttons */
+.btn-elegant {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-elegant:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: white;
+}
+
+.btn-elegant-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+.btn-elegant-outline:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-elegant-light {
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--accent-soft);
+}
+
+.btn-elegant-light:hover {
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Elegant Cards */
+.card-elegant {
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  padding: var(--space-lg);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-elegant:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-soft);
+}
+
+.card-elegant-featured {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--bg) 100%);
+  border: 2px solid var(--accent-soft);
+  box-shadow: var(--shadow-md);
+}
+
+.card-elegant-featured:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Elegant Dividers */
+.divider-elegant {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-medium), transparent);
+  margin: var(--space-xl) 0;
+}
+
+.divider-elegant-ornament {
+  text-align: center;
+  position: relative;
+  margin: var(--space-xl) 0;
+}
+
+.divider-elegant-ornament::before {
+  content: '◆';
+  color: var(--accent);
+  font-size: 0.75rem;
+  background: var(--bg);
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.divider-elegant-ornament::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-light);
+  z-index: 0;
+}
+
+/* Callout styles - Elegant version */
 .callout {
   border-left: 4px solid var(--accent);
-  padding: 1rem;
-  margin: 1rem 0;
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+  background: var(--accent-light);
   border-radius: 0 0.5rem 0.5rem 0;
-  background-color: var(--bg);
-  border-right: 1px solid var(--muted);
-  border-top: 1px solid var(--muted);
-  border-bottom: 1px solid var(--muted);
+  box-shadow: var(--shadow-sm);
 }
 
 .callout.note {
-  border-left-color: #3b82f6;
+  border-left-color: var(--info);
+  background: var(--accent-light);
 }
 
 .callout.tip {
-  border-left-color: #10b981;
+  border-left-color: var(--success);
+  background: #e8f5f0;
+}
+
+html.dark .callout.tip {
+  background: #1a2e26;
 }
 
 .callout.warn {
-  border-left-color: #f59e0b;
+  border-left-color: var(--warning);
+  background: #fef5ed;
 }
 
-/* Progress bar */
+html.dark .callout.warn {
+  background: #2e2419;
+}
+
+/* Progress bar - Elegant */
 .progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, #6366f1, #6366f1);
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
   transform-origin: left;
   z-index: 1000;
   transition: transform 0.1s ease-out;
+  box-shadow: 0 0 10px rgba(44, 95, 124, 0.3);
 }
 
-html.dark .progress-bar {
-  background: linear-gradient(90deg, #818cf8, #818cf8);
+/* Tag Pills - Elegant */
+.tag-elegant {
+  display: inline-block;
+  padding: 0.375rem 1rem;
+  background: var(--muted);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 2rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.tag-elegant:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent-soft);
+  transform: translateY(-1px);
+}
+
+/* Code blocks - Elegant */
+pre {
+  background: var(--muted);
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  padding: var(--space-md);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-sm);
+}
+
+code {
+  font-family: var(--font-mono);
+  background: var(--muted);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  border: 1px solid var(--border-light);
+}
+
+pre code {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+/* Blockquotes - Elegant */
+blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: var(--space-lg);
+  margin: var(--space-lg) 0;
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  position: relative;
+}
+
+blockquote::before {
+  content: '"';
+  font-size: 4rem;
+  color: var(--accent-soft);
+  position: absolute;
+  left: -0.5rem;
+  top: -1rem;
+  opacity: 0.3;
+  font-family: var(--font-serif);
+}
+
+/* Tables - Elegant */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin: var(--space-md) 0;
+  box-shadow: var(--shadow-sm);
+}
+
+th, td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+th {
+  background: var(--muted);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-family: var(--font-sans);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover {
+  background: var(--accent-light);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+/* Scrollbar - Elegant */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-soft);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Decorative Elements */
+.ornament {
+  text-align: center;
+  color: var(--accent);
+  font-size: 1.5rem;
+  margin: var(--space-lg) 0;
+}
+
+.drop-cap::first-letter {
+  font-size: 3.5em;
+  font-weight: 700;
+  float: left;
+  line-height: 0.8;
+  margin: 0.1em 0.1em 0 0;
+  font-family: var(--font-serif);
+  color: var(--accent);
+}
+
+/* Elegant Accent Box */
+.accent-box {
+  background: var(--accent-light);
+  border: 2px solid var(--accent-soft);
+  border-radius: 1rem;
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Pull Quote */
+.pull-quote {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--accent);
+  text-align: center;
+  padding: var(--space-lg);
+  margin: var(--space-xl) 0;
+  border-top: 2px solid var(--accent-soft);
+  border-bottom: 2px solid var(--accent-soft);
 }
